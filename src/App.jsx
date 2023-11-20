@@ -1,7 +1,11 @@
+import AddTodoForm from './features/todos/addTodoForm';
+
 const App = () => {
   return (
-    <div></div>
-  )
-}
+    <div>
+      <AddTodoForm /> 
+    </div>
+  );
+};
 
-export default App
+export default App;
