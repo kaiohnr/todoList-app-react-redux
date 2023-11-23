@@ -55,3 +55,10 @@
 .form-container__button:hover {
   border-color: #1b75d0;
 }
+
+.form-container__button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}

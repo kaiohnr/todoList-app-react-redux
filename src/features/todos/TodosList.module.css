@@ -1,0 +1,15 @@
+.todos-container {
+  padding: 1rem;
+  background-color: bisque;
+}
+
+.todos-container__list {
+  background-color: cadetblue;
+}
+
+.todos-container__list ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

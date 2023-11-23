@@ -1,17 +1,22 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
+import { current } from '@reduxjs/toolkit';
+import moment from 'moment/moment';
 
 const initialState = [
   {
-    id: '1',
-    todo: 'Do something nice for someone I care about',
+    id: nanoid(),
+    title: 'Do something nice for someone I care about',
     completed: true,
-    userId: 26,
+    createdDate: '22/11/2023 at 12:30',
+    editedDate: '22/11/2023 at 12:33',
   },
   {
-    id: '2',
-    todo: 'Watch a new movie',
+    id: nanoid(),
+    title: 'Watch a new movie',
     completed: false,
-    userId: 27,
+    createdDate: '22/11/2023 at 12:30',
+    editedDate: '22/11/2023 at 12:33',
   },
 ];
 
@@ -19,14 +24,35 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    addedTodo: {
+    addTodo: (state, action) => {
+      const getCurrentDate = new Date();
+      const generateId = nanoid();
+
+      const newTodo = {
+        id: generateId,
+        createdDate: moment(getCurrentDate).format('DD/MM/YYYY'),
+        createdTime: moment(getCurrentDate).format('HH:mm'),
+        editedDate: '',
+        title: action.payload,
+        completed: false,
+        isEditing: false,
+      };
+
+      return (state = [newTodo, ...state]);
+    },
+    deleteTodo: {
       reducer(state, action) {
-        state.push(action.payload);
+        return (state = state.filter((todo) => todo.id !== action.payload));
+      },
+    },
+    completeTodo: {
+      reducer(state, action) {
+        const getTodo = state.find((todo) => todo.id === action.payload);
+        getTodo.completed = !getTodo.completed;
       },
     },
   },
 });
 
-export const selectAllTodos = (state) => state.todos;
-export const { addedTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, completeTodo } = todosSlice.actions;
 export default todosSlice.reducer;
