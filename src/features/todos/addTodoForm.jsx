@@ -1,31 +1,48 @@
 import { FaCheck } from 'react-icons/fa';
-import { useState } from 'react';
 import styles from './addTodoForm.module.css';
-import { addTodo } from './todosSlice';
-import { useDispatch } from 'react-redux';
+import { addTodo, editTodoTitle } from './todosSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { editTitle, clearValues } from './todoTitleSlice';
 
 const AddTodoForm = () => {
   const dispatch = useDispatch();
-  const [todoTitle, setTodoTitle] = useState('');
+  const { todoTitle } = useSelector((store) => store.todoTitle);
+  const todos = useSelector((store) => store.todos);
+  const getEditingTodo = todos.find((todo) => todo.isEditing);
 
-  const changeTodoTitle = (e) => {
-    setTodoTitle(e.target.value);
+  const handleTitleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    dispatch(editTitle({ name, value }));
   };
 
   const canCreateTodo = todoTitle === '';
 
-  const createNewTodo = () => {
-    dispatch(addTodo(todoTitle));
-    setTodoTitle('');
-  };
+  function handleCreateTodo() {
+    if (getEditingTodo && getEditingTodo.isEditing) {
+      dispatch(editTodoTitle({ newTitle: todoTitle, editingTodoId: getEditingTodo.id }));
+      dispatch(clearValues());
+      return;
+    }
+
+    dispatch(
+      addTodo({
+        title: todoTitle,
+      })
+    );
+    dispatch(clearValues());
+  }
 
   return (
     <div className={styles['container']}>
       <h1>Good Morning, Unknown User. What about write a new todo?</h1>
       <div className={styles['form-container']}>
         <input
+          autoCapitalize="true"
+          name="todoTitle"
+          onChange={(e) => handleTitleChange(e)}
+          autoFocus
           value={todoTitle}
-          onChange={changeTodoTitle}
           className={styles['form-container__input']}
           type="text"
           placeholder="Write a todo"
@@ -33,7 +50,7 @@ const AddTodoForm = () => {
         <button
           disabled={canCreateTodo}
           className={styles['form-container__button']}
-          onClick={() => createNewTodo()}
+          onClick={() => handleCreateTodo()}
         >
           <FaCheck />
         </button>

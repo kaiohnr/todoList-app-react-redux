@@ -4,20 +4,7 @@ import { current } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
 
 const initialState = [
-  {
-    id: nanoid(),
-    title: 'Do something nice for someone I care about',
-    completed: true,
-    createdDate: '22/11/2023 at 12:30',
-    editedDate: '22/11/2023 at 12:33',
-  },
-  {
-    id: nanoid(),
-    title: 'Watch a new movie',
-    completed: false,
-    createdDate: '22/11/2023 at 12:30',
-    editedDate: '22/11/2023 at 12:33',
-  },
+
 ];
 
 const todosSlice = createSlice({
@@ -33,7 +20,8 @@ const todosSlice = createSlice({
         createdDate: moment(getCurrentDate).format('DD/MM/YYYY'),
         createdTime: moment(getCurrentDate).format('HH:mm'),
         editedDate: '',
-        title: action.payload,
+        editedTime: '',
+        title: action.payload.title,
         completed: false,
         isEditing: false,
       };
@@ -51,8 +39,26 @@ const todosSlice = createSlice({
         getTodo.completed = !getTodo.completed;
       },
     },
+    setTodoAsEditing: {
+      reducer(state, action) {
+        const editingTodo = state.find((todo) => todo.id === action.payload);
+        editingTodo.isEditing = true;
+      },
+    },
+    editTodoTitle: {
+      reducer(state, action) {
+        const { newTitle, editingTodoId } = action.payload;
+        const todoItem = state.find((todo) => todo.id === editingTodoId);
+        const getEditedDate = new Date();
+        todoItem.editedDate = moment(getEditedDate).format('DD/MM/YYYY');
+        todoItem.editedTime = moment(getEditedDate).format('HH:mm');
+        todoItem.title = newTitle;
+        todoItem.isEditing = false;
+      },
+    },
   },
 });
 
-export const { addTodo, deleteTodo, completeTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, completeTodo, setTodoAsEditing, editTodoTitle } =
+  todosSlice.actions;
 export default todosSlice.reducer;

@@ -10,7 +10,7 @@ const TodosList = () => {
       <div className={styles['todos-container__list']}>
         <ul>
           {allTodos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} />
+            <TodoItem key={todo.id} {...todo} />
           ))}
         </ul>
       </div>
