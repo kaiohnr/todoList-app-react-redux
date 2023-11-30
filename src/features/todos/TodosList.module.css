@@ -1,15 +1,17 @@
 .todos-container {
   padding: 1rem;
-  background-color: bisque;
 }
 
 .todos-container__list {
-  background-color: cadetblue;
+  border-radius: 12px;
 }
 
 .todos-container__list ul {
+  padding: 1rem;
   list-style: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  gap: 4rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
 }

@@ -33,26 +33,38 @@ const TodoItem = ({
 
   return (
     <li className={styles['todo-item']}>
-      <p className={styles['todo-item__title']}>{title}</p>
-      <p className={styles['todo-item__createdDate']}>
-        Created At:{createdDate} in {createdTime}
-      </p>
-      {editedDate ? (
-        <p className={styles['todo-item__editedDate']}>
-          Edited At:{editedDate} in {editedTime}
+      <div className={styles['todo-item__title']}>
+        <p>{title}</p>
+      </div>
+
+      <div className={styles['todo-item__createdDate']}>
+        <p>Created At:</p>
+        <p>
+          {createdDate} in {createdTime}
         </p>
-      ) : (
-        ''
-      )}
-      <p className={styles['todo-item__completed']}>
-        Completed:
+      </div>
+
+      <div className={styles['todo-item__editedDate']}>
+        {editedDate && <p>Edited At:</p>}
+        {editedDate ? (
+          <p>
+            {editedDate} in {editedTime}
+          </p>
+        ) : (
+          ''
+        )}
+      </div>
+
+      <div className={styles['todo-item__completed']}>
+        <p>Completed:</p>
         <input
           className={styles['todo-item__checkbox']}
           type="checkbox"
           defaultChecked={completed}
           onChange={changeCompleteTodo}
         />
-      </p>
+      </div>
+
       <div className={styles['todo-item__options']}>
         <button
           className={styles['todo-item__edit-btn']}

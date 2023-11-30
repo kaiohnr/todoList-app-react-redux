@@ -4,7 +4,46 @@ import { current } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
 
 const initialState = [
-
+  {
+    id: '1',
+    createdDate: '28/11/2023',
+    createdTime: '14:04',
+    editedDate: '',
+    editedTime: '',
+    title: 'Comprar leite',
+    completed: false,
+    isEditing: false,
+  },
+  {
+    id: '2',
+    createdDate: '28/11/2023',
+    createdTime: '12:04',
+    editedDate: '',
+    editedTime: '',
+    title: 'Comprar feijao',
+    completed: false,
+    isEditing: false,
+  },
+  {
+    id: '3',
+    createdDate: '25/11/2023',
+    createdTime: '08:00',
+    editedDate: '',
+    editedTime: '',
+    title: 'Correr às nove horas',
+    completed: true,
+    isEditing: false,
+  },
+  {
+    id: '4',
+    createdDate: '29/11/2023',
+    createdTime: '05:00',
+    editedDate: '',
+    editedTime: '',
+    title: 'Correr às seis horas',
+    completed: true,
+    isEditing: false,
+  },
 ];
 
 const todosSlice = createSlice({

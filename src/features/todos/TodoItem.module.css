@@ -1,3 +1,78 @@
-.todo-items {
-  
+.todo-item {
+  font-family: 'Raleway', sans-serif;
+  border-radius: 14px;
+  background-color: #c1c1c1;
+  padding: 0.6rem;
+
+  flex-basis: 33.33333% 
+}
+
+.todo-item div {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.todo-item div p:first-child {
+  font-weight: bold;
+}
+
+.todo-item__title {
+  font-weight: bold;
+}
+
+.todo-item__createdDate {
+}
+
+.todo-item__editedDate {
+}
+
+.todo-item__completed {
+}
+
+.todo-item__checkbox {
+}
+
+.todo-item__options {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.todo-item__edit-btn {
+  padding: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+  border-radius: 8px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #979797;
+}
+
+.todo-item__edit-btn:hover {
+  border-color: #005cc8;
+  box-shadow: 1px 1px 16px 1px #a0d0ff;
+}
+
+.todo-item__delete-btn {
+  padding: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border-radius: 8px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #979797;
+}
+
+.todo-item__delete-btn:hover {
+  border-color: #ff5353;
+  box-shadow: 1px 1px 16px 1px #ffa7a7;
 }
