@@ -3,12 +3,15 @@ import {
   showAllTodos,
   showCompletedTodos,
   showUncompletedTodos,
+  showDeletedTodos,
 } from './FilterTodoSlice';
 import styles from './FilterTodos.module.css';
+import { IoTrashBin } from 'react-icons/io5';
 
 const FilterTodos = () => {
   const dispatch = useDispatch();
   const { filter } = useSelector((store) => store.filter);
+  const todosBin = useSelector((store) => store.todosBin);
 
   const showAll = () => {
     dispatch(showAllTodos());
@@ -20,6 +23,10 @@ const FilterTodos = () => {
 
   const showUncompleted = () => {
     dispatch(showUncompletedTodos());
+  };
+
+  const showDeleted = () => {
+    dispatch(showDeletedTodos());
   };
 
   return (
@@ -47,6 +54,22 @@ const FilterTodos = () => {
       >
         <p onClick={showUncompleted}>Uncompleted</p>
       </div>
+
+      {todosBin.length >= 1 && (
+        <div
+          className={` ${styles['filter-option__bin']} ${
+            filter === 'deleted' ? styles['active-bin'] : ''
+          } `}
+        >
+          <p onClick={showDeleted}>
+            Deleted Todos{' '}
+            <span className={styles['bin-count']}>
+              {todosBin ? todosBin.length : null}
+            </span>
+          </p>
+          <IoTrashBin />
+        </div>
+      )}
     </div>
   );
 };

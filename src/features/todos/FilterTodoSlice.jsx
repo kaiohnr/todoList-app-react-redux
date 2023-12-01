@@ -17,10 +17,18 @@ const filterSlice = createSlice({
     showUncompletedTodos: (state, action) => {
       state.filter = 'uncompleted';
     },
+    showDeletedTodos: (state, action) => {
+      console.log('deleted');
+      state.filter = 'deleted';
+    },
   },
 });
 
-export const { showAllTodos, showCompletedTodos, showUncompletedTodos } =
-  filterSlice.actions;
+export const {
+  showAllTodos,
+  showCompletedTodos,
+  showUncompletedTodos,
+  showDeletedTodos,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;
