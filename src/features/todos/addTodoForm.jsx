@@ -33,8 +33,6 @@ const AddTodoForm = () => {
     dispatch(clearValues());
   }
 
-
-
   return (
     <div className={styles['container']}>
       <div className={styles['form-container']}>
