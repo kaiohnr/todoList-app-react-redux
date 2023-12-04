@@ -1,0 +1,24 @@
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.pagination-container p {
+  transition: all 0.2s ease;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.1rem 0.75rem;
+  border-style: solid;
+  border-color: #3188df;
+  border-width: 0.1rem;
+}
+
+.pagination-container p:hover {
+  background-color: #96cbff;
+}
+
+.page-active {
+  background-color: #96cbff;
+}

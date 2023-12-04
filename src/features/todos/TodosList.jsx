@@ -2,14 +2,27 @@ import { useSelector } from 'react-redux';
 import styles from './TodosList.module.css';
 import TodoItem from './TodoItem';
 import FilterTodos from './FilterTodos';
+import TodosPagination from './TodosPagination';
+import { useState } from 'react';
 
 const TodosList = () => {
   const allTodos = useSelector((state) => state.todos);
-  const { filter } = useSelector((state) => state.filter);
-  const deletedTodos = useSelector((state) => state.todosBin);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [todosPerPage, setTodosPerPage] = useState(6);
 
+  const { filter } = useSelector((state) => state.filter);
+
+  const deletedTodos = useSelector((state) => state.todosBin);
   const completedTodos = allTodos.filter((todo) => todo.completed === true);
   const uncompletedTodos = allTodos.filter((todo) => todo.completed === false);
+
+  const indexOfLastTodo = currentPage * todosPerPage; // 9
+  const indexOfFirstTodo = indexOfLastTodo - todosPerPage; // 0
+  const currentTodo = allTodos.slice(indexOfFirstTodo, indexOfLastTodo);
+
+  const paginate = (number) => {
+    setCurrentPage(number);
+  };
 
   return (
     <div className={styles['todos-container']}>
@@ -17,7 +30,7 @@ const TodosList = () => {
         <FilterTodos />
         <ul>
           {filter === 'all' &&
-            allTodos.map((todo) => <TodoItem key={todo.id} {...todo} />)}
+            currentTodo.map((todo) => <TodoItem key={todo.id} {...todo} />)}
         </ul>
         <ul>
           {filter === 'completed' &&
@@ -32,6 +45,12 @@ const TodosList = () => {
             deletedTodos.map((todo) => <TodoItem key={todo.id} {...todo} />)}
         </ul>
       </div>
+      <TodosPagination
+        todosPerPage={todosPerPage}
+        totalTodos={allTodos.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
